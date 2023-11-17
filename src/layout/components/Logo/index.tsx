@@ -11,7 +11,7 @@ const Logo: React.FC<{ collapsed: boolean }> = ({ collapsed }) => {
 
   return (
     <Flex style={boxStyle} justify='center' align='center'>
-      <Image width={30} src="https://gw.alipayobjects.com/zos/rmsportal/KDpgvguMpGfqaHPjicRK.svg" />
+      <Image preview={false} width={30} src="https://gw.alipayobjects.com/zos/rmsportal/KDpgvguMpGfqaHPjicRK.svg" />
       <div style={{ display: collapsed ? 'none' : '' }}>vite-react-template</div>
     </Flex>
   );
