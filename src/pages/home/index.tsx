@@ -21,6 +21,9 @@ function Home() {
         <Tag color="#108ee9">#108ee9</Tag>
       </Space>
       <Button type="primary" onClick={toLogin}>toLogin</Button>
+      <h1 className="text-3xl font-bold underline bg-green-800 hover:bg-green-600 text-white">
+        Hello world!
+      </h1>
     </>
   )
 }
