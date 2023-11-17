@@ -2,50 +2,25 @@ import React, { useState, useEffect } from 'react';
 import { Outlet, useNavigate, useLocation } from "react-router-dom";
 import {
   MenuFoldOutlined,
-  MenuUnfoldOutlined,
-  UserOutlined
+  MenuUnfoldOutlined
 } from '@ant-design/icons';
-import type { MenuProps } from 'antd';
-import { Layout, Menu, Button, theme, Breadcrumb } from 'antd';
+import { Layout, Button, theme, Flex } from 'antd';
+import Logo from './components/Logo'
+import MenuBar from './components/MenuBar'
+import NavBar from './components/NavBar'
+import BreadcrumbBar from './components/Breadcrumb'
 
-const { Header, Sider, Content } = Layout;
+// import { ReactComponent as LogoSvg } from "@/assets/react.svg";
 
-type MenuItem = Required<MenuProps>['items'][number];
+const { Header, Sider, Content, Footer } = Layout;
 
-function getItem(
-  label: React.ReactNode,
-  key: React.Key,
-  icon?: React.ReactNode,
-  children?: MenuItem[],
-  type?: 'group',
-): MenuItem {
-  return {
-    key,
-    icon,
-    children,
-    label,
-    type,
-  } as MenuItem;
-}
-
-const items: MenuItem[] = [
-  // getItem('Option 1', '1', <UserOutlined />),
-  getItem('Home', '/home', <UserOutlined />),
-  getItem('Demo', 'sub1', <UserOutlined />, [
-    getItem('List', '/list'),
-    getItem('Table', '/table'),
-    getItem('Project', '/project')
-  ]),
-];
 
 const LayoutPage: React.FC = () => {
 
   const navigate = useNavigate()
   const location = useLocation();
 
-  // console.log(RenderRouter);
   useEffect(() => {
-
     if (location.pathname === "/") {
       navigate("/home");
     }
@@ -56,51 +31,46 @@ const LayoutPage: React.FC = () => {
     token: { colorBgContainer },
   } = theme.useToken();
 
-  const onClick: MenuProps['onClick'] = (e) => {
-    // console.log('click ', e);
-    navigate(e.key);
-  };
-
   return (
     <Layout>
-      <Sider trigger={null} collapsible collapsed={collapsed}>
-        <div className="demo-logo-vertical" />
-        <Menu
-          onClick={onClick}
-          theme="dark"
-          mode="inline"
-          defaultOpenKeys={['sub1']}
-          defaultSelectedKeys={['/home']}
-          items={items}
-        />
+      <Sider
+        collapsedWidth="50"
+        trigger={null}
+        collapsible
+        collapsed={collapsed}
+      >
+        <Logo collapsed={collapsed} />
+        <MenuBar />
       </Sider>
       <Layout>
         <Header style={{ padding: 0, background: colorBgContainer }}>
-          <Button
-            type="text"
-            icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
-            onClick={() => setCollapsed(!collapsed)}
-            style={{
-              fontSize: '16px',
-              width: 64,
-              height: 64,
-            }}
-          />
+          <Flex justify='space-between' align="center">
+            <Button
+              type="text"
+              icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
+              onClick={() => setCollapsed(!collapsed)}
+              style={{
+                fontSize: '16px',
+                width: 64,
+                height: 64,
+              }}
+            />
+            <NavBar />
+          </Flex>
+
         </Header>
+        <BreadcrumbBar />
         <Content
           style={{
-            margin: '24px 16px',
-            padding: 24,
-            minHeight: 280,
+            margin: '15px 15px 0',
+            padding: 25,
             background: colorBgContainer,
           }}
         >
-          <Breadcrumb style={{ margin: '16px 0' }}>
-            <Breadcrumb.Item>User</Breadcrumb.Item>
-            <Breadcrumb.Item>Bill</Breadcrumb.Item>
-          </Breadcrumb>
+
           <Outlet />
         </Content>
+        <Footer style={{ textAlign: 'center' }}>vite + react ©2023 Created by lzp</Footer>
       </Layout>
     </Layout>
   );
