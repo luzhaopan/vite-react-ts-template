@@ -1,12 +1,12 @@
-import { lazy, FC } from "react";
+import { FC } from "react";
 import { useRoutes, RouteObject } from "react-router-dom";
 import LayoutPage from "@/layout";
 import Home from "@/pages/home";
 import ListPage from "@/pages/list";
 import TablePage from "@/pages/table";
 import LoginPage from "@/pages/login";
-
-const NotFoundPage = lazy(() => import('@/pages/404'));
+import Exception from '@/components/Exception';
+// const NotFoundPage = lazy(() => import('@/pages/404'));
 
 const routeList: RouteObject[] = [
   {
@@ -14,26 +14,26 @@ const routeList: RouteObject[] = [
     element: <LayoutPage />,
     children: [
       {
-        path: "/home",
+        path: "home",
         element: <Home />,
       },
       {
-        path: "demo/list",
+        path: "list",
         element: <ListPage />,
       },
       {
-        path: "demo/table",
+        path: "table",
         element: <TablePage />,
       },
       {
         path: "*",
-        element: <NotFoundPage />,
+        element: <Exception title="404" description="Sorry, the page you visited does not exist." />
       },
     ],
   },
   {
     path: "*",
-    element: <NotFoundPage />,
+    element: <Exception title="404" description="Not Found" />
   },
   {
     path: "login",

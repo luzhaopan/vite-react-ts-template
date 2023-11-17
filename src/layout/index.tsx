@@ -6,7 +6,7 @@ import {
   UserOutlined
 } from '@ant-design/icons';
 import type { MenuProps } from 'antd';
-import { Layout, Menu, Button, theme } from 'antd';
+import { Layout, Menu, Button, theme, Breadcrumb } from 'antd';
 
 const { Header, Sider, Content } = Layout;
 
@@ -31,10 +31,10 @@ function getItem(
 const items: MenuItem[] = [
   // getItem('Option 1', '1', <UserOutlined />),
   getItem('Home', '/home', <UserOutlined />),
-
   getItem('Demo', 'sub1', <UserOutlined />, [
-    getItem('List', '/demo/list'),
-    getItem('Table', '/demo/table')
+    getItem('List', '/list'),
+    getItem('Table', '/table'),
+    getItem('Project', '/project')
   ]),
 ];
 
@@ -95,6 +95,10 @@ const LayoutPage: React.FC = () => {
             background: colorBgContainer,
           }}
         >
+          <Breadcrumb style={{ margin: '16px 0' }}>
+            <Breadcrumb.Item>User</Breadcrumb.Item>
+            <Breadcrumb.Item>Bill</Breadcrumb.Item>
+          </Breadcrumb>
           <Outlet />
         </Content>
       </Layout>
