@@ -7,4 +7,7 @@ export default{
     extend: {},
   },
   plugins: [],
+  corePlugins: {
+    preflight: false, // 解决tailwindcss和antd样式冲突的问题
+  },
 }
